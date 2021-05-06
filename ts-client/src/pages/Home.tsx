@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Contains } from "../controller/Contains";
-import { formatPhoneNumber } from "../controller/NumberProcessor";
-import FormattedNumber from "../model/FormattedNumber";
+import { Contact } from "../model/Contact";
 
 const Home = () => {
   const [number, setNumber] = useState<string>("");
@@ -28,11 +27,11 @@ const Home = () => {
           <button
             className="button"
             onClick={() => {
-              let parsedNumber: FormattedNumber | undefined = formatPhoneNumber(
-                number
-              );
-              if (parsedNumber) {
-                setRtn(parsedNumber);
+
+              let parsedContact: Contact | undefined = undefined
+
+              if (parsedContact) {
+                setRtn(parsedContact);
               } else {
                 // Toast
                 setErr("Invalid Input");
@@ -48,7 +47,7 @@ const Home = () => {
         <div className="modal-background"></div>
         <div className="modal-card" style={{ width: "80%" }}>
           <header className="modal-card-head">
-            <p className="modal-card-title">Parsed number</p>
+            <p className="modal-card-title">Parsed Contact</p>
             <button className="delete" aria-label="close"
               onClick={() =>
                 setRtn(undefined)}></button>

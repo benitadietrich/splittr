@@ -8,4 +8,5 @@ export interface Contact{
     gender?: Gender;
     firstname?: string;
     lastname?: string;
+    unformatted?: string;
 }

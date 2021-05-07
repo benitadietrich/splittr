@@ -3,9 +3,17 @@ import { Contains } from "../controller/Contains";
 import { Contact } from "../model/Contact";
 
 const Home = () => {
-  const [number, setNumber] = useState<string>("");
+
+  // Contact String
+  const [contact, setContact] = useState<string>("");
+
+  // Rtn from Algorithm
   const [rtn, setRtn] = useState<any>(undefined);
+
+  // Rtn objects for Table
   const [rtn1, setRtn1] = useState<any[]>([]);
+
+  // Error Message
   const [err, setErr] = useState<string>("");
 
   return (
@@ -15,10 +23,10 @@ const Home = () => {
           <div className="control">
             <input
               className="input"
-              value={number}
-              onChange={(e) => setNumber(e.target.value!)}
+              value={contact}
+              onChange={(e) => setContact(e.target.value!)}
               type="text"
-              placeholder="Number..."
+              placeholder="Contact..."
             />
           </div>
         </div>
@@ -43,6 +51,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Confirmation Modal */}
       <div className={rtn ? "modal is-active" : "modal"}>
         <div className="modal-background"></div>
         <div className="modal-card" style={{ width: "80%" }}>
@@ -73,10 +82,10 @@ const Home = () => {
                           className="input"
                           onChange={(e) =>
                             setRtn((rtn: any) => {
-                              return { ...rtn, countryCode: e.target.value! };
+                              return { ...rtn, salutation: e.target.value! };
                             })
                           }
-                          value={rtn?.countryCode}
+                          value={rtn?.salutation}
                           type="text"
                           placeholder="N/A"
                         />
@@ -86,10 +95,10 @@ const Home = () => {
                           className="input"
                           onChange={(e) =>
                             setRtn((rtn: any) => {
-                              return { ...rtn, ortsvorwahl: e.target.value! };
+                              return { ...rtn, title: e.target.value! };
                             })
                           }
-                          value={rtn?.ortsvorwahl}
+                          value={rtn?.title}
                           type="text"
                           placeholder="N/A"
                         />
@@ -99,10 +108,10 @@ const Home = () => {
                           className="input"
                           onChange={(e) =>
                             setRtn((rtn: any) => {
-                              return { ...rtn, number: e.target.value! };
+                              return { ...rtn, gender: e.target.value! };
                             })
                           }
-                          value={rtn?.number}
+                          value={rtn?.gender}
                           type="text"
                           placeholder="N/A"
                         />
@@ -112,10 +121,10 @@ const Home = () => {
                           className="input"
                           onChange={(e) =>
                             setRtn((rtn: any) => {
-                              return { ...rtn, durchwahl: e.target.value! };
+                              return { ...rtn, firstname: e.target.value! };
                             })
                           }
-                          value={rtn?.durchwahl}
+                          value={rtn?.firstname}
                           type="text"
                           placeholder="N/A"
                         />
@@ -125,10 +134,10 @@ const Home = () => {
                           className="input"
                           onChange={(e) =>
                             setRtn((rtn: any) => {
-                              return { ...rtn, regionCode: e.target.value! };
+                              return { ...rtn, lastname: e.target.value! };
                             })
                           }
-                          value={rtn?.regionCode}
+                          value={rtn?.lastname}
                           type="text"
                           placeholder="N/A"
                         />
@@ -176,6 +185,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Error Message Modal */}
       {err !== "" && setTimeout(() => setErr(""), 2000) && (
         <div className="error" style={{
           backgroundColor: "white",
@@ -194,19 +204,19 @@ const Home = () => {
         </div>
       )}
 
+      {/* Table */}
       <div className="columns">
         <div className="column is-12 is-offset-1">
           <table className="table">
             <thead>
               <tr>
                 <th>id</th>
-                <th>country</th>
-                <th>ortsvorwahl</th>
-                <th>nummer</th>
-                <th>durchwahl</th>
-                <th>possibility</th>
-                <th>regionCode</th>
-                <th>raw</th>
+                <th>salutation</th>
+                <th>title</th>
+                <th>gender</th>
+                <th>firstname</th>
+                <th>lastname</th>
+                <th>unformatted</th>
               </tr>
             </thead>
 
@@ -220,12 +230,11 @@ const Home = () => {
 
                       <tr style={ Contains(rtn1, r) ? {backgroundColor: "yellow"} : {backgroundColor: "white"} }>
                         <td>{`${r.id.toString().slice(0, 6)}...`}</td>
-                        <td>{r.countryCode}</td>
-                        <td>{r.ortsvorwahl}</td>
-                        <td>{r.number}</td>
-                        <td>{r.durchwahl}</td>
-                        <td>{r.possibility}</td>
-                        <td>{r.regionCode}</td>
+                        <td>{r.salutation}</td>
+                        <td>{r.title}</td>
+                        <td>{r.gender}</td>
+                        <td>{r.firstname}</td>
+                        <td>{r.lastname}</td>
                         <td>{r.unformatted}</td>
                       </tr>
 

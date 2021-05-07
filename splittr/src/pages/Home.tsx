@@ -36,6 +36,7 @@ const Home = () => {
             className="button"
             onClick={() => {
 
+              // Execute Function 
               let parsedContact: Contact | undefined = undefined
 
               if (parsedContact) {

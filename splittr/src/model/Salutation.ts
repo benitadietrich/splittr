@@ -1,6 +1,4 @@
-export enum Salutation{
-    Herr,
-    Frau, 
-    Mrs,
-    Mme
+export interface Salutation{
+    id: string;
+    value: string;
 }

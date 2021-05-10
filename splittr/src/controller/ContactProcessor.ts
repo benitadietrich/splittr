@@ -13,7 +13,6 @@ class ContactProcessor implements DataProcessor{
     convert(str: string): Contact | undefined{
         return undefined;
     }
-    
 
 }
 

@@ -16,7 +16,8 @@ Ich als Sachbearbeiter möchte, dass eingegebene Briefanreden automatisch in ihr
 * Nachname
 
 Ich weiß, dass ich fertig bin, wenn:
-* Falls möglich die Informationen aus der Briefanrede extrahiert werden.
+* Die Informationenen korrekt aus der Briefrede extrahiert werden
+* 
 
 ## User Story 2
 **Story Punkte:** 1,5

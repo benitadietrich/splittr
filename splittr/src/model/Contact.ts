@@ -5,7 +5,7 @@ import { Title } from "./Title";
 export interface Contact{
     id: string;
     salutation?: Salutation;
-    title?: Title;
+    title?: string;
     gender?: Gender;
     firstname?: string;
     lastname?: string;

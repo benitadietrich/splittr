@@ -52,9 +52,7 @@ const Home = () => {
       </div>
 
       {/* Confirmation Modal */}
-      {rtn && 
-        <ConfirmationModal setRtn={setRtn} rtn={rtn}/>
-      }
+      <ConfirmationModal setRtn={setRtn} rtn={rtn}/>
 
       {/* Overview */}
       <Overview/>

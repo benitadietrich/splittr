@@ -1,17 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import { Contains } from '../controller/Contains'
+import {db, fb} from "../backend/firebase"
+import { Contact } from '../model/Contact'
 
 const Overview = () => {
 
-    useEffect(() => {
-    
-        return () => {
- 
-        }
-    }, [])
+  const [contacts, setContacts] = useState<Contact[]>()
 
-    // TODO
-    const [rtn1, setRtn1] = useState<any[]>([])
+  useEffect(() => {
+    let ref = db.collection('contacts');
+
+    let unsubscribe = ref.onSnapshot(onCollectionUpdate);
+
+    return () => {
+        unsubscribe();
+    }
+}, [])
+
+const onCollectionUpdate = (querySnapshot: any) => {
+
+    setContacts([]);
+
+    let fbContacts: Contact[] = [];
+
+    querySnapshot.forEach((doc:any) => {
+      fbContacts.push({
+        id: doc.id,
+        ...doc.data()
+      });      
+
+    });
+
+    setContacts(fbContacts)
+
+}
 
     return (
       <div className="columns">
@@ -32,14 +54,13 @@ const Overview = () => {
             <tbody>
 
               {
-              rtn1.length > 0 &&
+              contacts && contacts.length > 0 &&
 
-                rtn1.map(r => {
-                  if (r.checked) {
+                contacts.map((r: Contact) => {
                     return (
 
-                      <tr style={ Contains(rtn1, r) ? {backgroundColor: "yellow"} : {backgroundColor: "white"} }>
-                        <td>{`${r.id.toString().slice(0, 6)}...`}</td>
+                      <tr key={r.id} style={ Contains(contacts, r) ? {backgroundColor: "yellow"} : {backgroundColor: "white"} }>
+                        <td>{`${r.id.slice(0, 6)}...`}</td>
                         <td>{r.salutation}</td>
                         <td>{r.title}</td>
                         <td>{r.gender}</td>
@@ -49,10 +70,6 @@ const Overview = () => {
                       </tr>
 
                     )
-                  } else {
-                    <></>
-                  }
-
                 })}
             </tbody>
 

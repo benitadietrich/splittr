@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Overview from "../components/Overview";
 import { Contains } from "../controller/Contains";
 import { Contact } from "../model/Contact";
 
@@ -185,6 +186,8 @@ const Home = () => {
           </footer>
         </div>
       </div>
+
+      <Overview/>
 
       {/* Error Message Modal */}
       {err !== "" && setTimeout(() => setErr(""), 2000) && (

@@ -48,6 +48,7 @@ const onCollectionUpdate = (querySnapshot: any) => {
                 <th>firstname</th>
                 <th>lastname</th>
                 <th>unformatted</th>
+                <th>formatted</th>
               </tr>
             </thead>
 
@@ -61,12 +62,13 @@ const onCollectionUpdate = (querySnapshot: any) => {
 
                       <tr key={r.id} style={ Contains(contacts, r) ? {backgroundColor: "yellow"} : {backgroundColor: "white"} }>
                         <td>{`${r.id.slice(0, 6)}...`}</td>
-                        <td>{r.salutation}</td>
-                        <td>{r.title}</td>
+                        <td>{r.salutation?.value}</td>
+                        <td>{r.title?.value}</td>
                         <td>{r.gender}</td>
                         <td>{r.firstname}</td>
                         <td>{r.lastname}</td>
                         <td>{r.unformatted}</td>
+                        <td>{r.formatted}</td>
                       </tr>
 
                     )

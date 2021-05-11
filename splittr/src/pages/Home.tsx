@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import ContactProcessor from "../controller/ContactProcessor";
 import { Contains } from "../controller/Contains";
 import { Contact } from "../model/Contact";
 
-const Home = () => {
+const processor = new ContactProcessor();
 
+const Home = () => {
   // Contact String
   const [contact, setContact] = useState<string>("");
 
@@ -35,9 +37,12 @@ const Home = () => {
           <button
             className="button"
             onClick={() => {
-
-              // Execute Function 
-              let parsedContact: Contact | undefined = undefined
+              // Execute Function
+              let parsedContact: Contact | undefined;
+              processor.convert(contact).then((res) => {
+                console.log("parsedContact", res);
+                parsedContact = res;
+              });
 
               if (parsedContact) {
                 setRtn(parsedContact);
@@ -58,9 +63,11 @@ const Home = () => {
         <div className="modal-card" style={{ width: "80%" }}>
           <header className="modal-card-head">
             <p className="modal-card-title">Parsed Contact</p>
-            <button className="delete" aria-label="close"
-              onClick={() =>
-                setRtn(undefined)}></button>
+            <button
+              className="delete"
+              aria-label="close"
+              onClick={() => setRtn(undefined)}
+            ></button>
           </header>
           <section className="modal-card-body">
             <div className="columns">
@@ -163,10 +170,13 @@ const Home = () => {
               className="button is-success"
               onClick={() => {
                 //save data
-                setRtn1([...rtn1, {
-                  ...rtn,
-                  checked: true,
-                }]);
+                setRtn1([
+                  ...rtn1,
+                  {
+                    ...rtn,
+                    checked: true,
+                  },
+                ]);
                 //cleanup
                 setRtn(undefined);
               }}
@@ -188,23 +198,27 @@ const Home = () => {
 
       {/* Error Message Modal */}
       {err !== "" && setTimeout(() => setErr(""), 2000) && (
-        <div className="error" style={{
-          backgroundColor: "white",
-          position: "absolute",
-          left: "1rem",
-          right: "1rem",
-          height: "3rem",
-          bottom: "1rem",
-          borderRadius: "10px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          border: "1px solid #dbdbdb"
-        }}>
+        <div
+          className="error"
+          style={{
+            backgroundColor: "white",
+            position: "absolute",
+            left: "1rem",
+            right: "1rem",
+            height: "3rem",
+            bottom: "1rem",
+            borderRadius: "10px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            border: "1px solid #dbdbdb",
+          }}
+        >
           <h2 style={{ color: "#363636", fontSize: "1rem" }}>{err}</h2>
         </div>
       )}
-    </div>);
+    </div>
+  );
 };
 
 export default Home;

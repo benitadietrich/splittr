@@ -59,16 +59,24 @@ const Home = () => {
       </div>
 
       {/* Confirmation Modal */}
-      <ConfirmationModal setRtn={setRtn} rtn={rtn}/>
+      <ConfirmationModal setRtn={setRtn} rtn={rtn} />
 
       {/* Overview */}
-      <Overview/>
+      <Overview />
 
-      <h2 className="title">Title Management</h2>
-
-      <ShowTitle/>
-
-      <AddTitle/>
+      <div className="columns">
+        <div className="column is-offset-1">
+          <h2 className="title">Title Management</h2>
+        </div>
+      </div>
+      <div className="columns">
+        <div className="column is-offset-1 is-7">
+          <ShowTitle />
+        </div>
+        <div className="column is-3">
+          <AddTitle />
+        </div>
+      </div>
 
       {/* Error Message Modal */}
       {err !== "" && setTimeout(() => setErr(""), 2000) && (

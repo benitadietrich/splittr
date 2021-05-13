@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import AddTitle from "../components/AddTitle";
 import ConfirmationModal from "../components/ConfirmationModal";
 import Overview from "../components/Overview";
+import ShowTitle from "../components/ShowTitle";
 import ContactProcessor from "../controller/ContactProcessor";
 import { Contains } from "../controller/Contains";
 import { Contact } from "../model/Contact";
@@ -61,6 +63,12 @@ const Home = () => {
 
       {/* Overview */}
       <Overview/>
+
+      <h2 className="title">Title Management</h2>
+
+      <ShowTitle/>
+
+      <AddTitle/>
 
       {/* Error Message Modal */}
       {err !== "" && setTimeout(() => setErr(""), 2000) && (

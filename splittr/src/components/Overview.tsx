@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Contains } from '../controller/Contains'
-import {db, fb} from "../backend/firebase"
+import {db} from "../backend/firebase"
 import { Contact } from '../model/Contact'
 
 const Overview = () => {

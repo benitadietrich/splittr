@@ -39,18 +39,19 @@ const Home = () => {
             className="button"
             onClick={() => {
               // Execute Function
-              let parsedContact: Contact | undefined;
               processor.convert(contact).then((res) => {
-                console.log("parsedContact", res);
-                parsedContact = res;
+
+                let parsedContact: Contact | undefined = res;
+                
+                if (parsedContact) {
+                  setRtn(parsedContact);
+                } else {
+                  // Toast
+                  setErr("Invalid Input");
+                }
+
               });
 
-              if (parsedContact) {
-                setRtn(parsedContact);
-              } else {
-                // Toast
-                setErr("Invalid Input");
-              }
             }}
           >
             Validate

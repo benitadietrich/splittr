@@ -5,16 +5,18 @@ import { Salutation } from "../model/Salutation";
 import { Title } from "../model/Title";
 
 const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
-
-  const [titles, setTitles] = useState<Title[]>([])
-  const [salutations, setSalutations] = useState<Salutation[]>([])
+  const [titles, setTitles] = useState<Title[]>([]);
+  const [salutations, setSalutations] = useState<Salutation[]>([]);
 
   useEffect(() => {
-    getTitles().then(titles => {console.log(titles); setTitles(titles)});
-    getSalutation().then(salutations => setSalutations(salutations));
-  }, [])
+    getTitles().then((titles) => {
+      console.log(titles);
+      setTitles(titles);
+    });
+    getSalutation().then((salutations) => setSalutations(salutations));
+  }, []);
 
-  const getSalutation = async(): Promise<Salutation[]> => {
+  const getSalutation = async (): Promise<Salutation[]> => {
     let salutations: Salutation[] = [];
 
     //Get all salutation
@@ -22,9 +24,9 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
     docs.forEach((doc: any) => salutations.push(doc.data()));
 
     return salutations;
-  }
+  };
 
-  const getTitles = async(): Promise<Title[]> => {
+  const getTitles = async (): Promise<Title[]> => {
     let titles: Title[] = [];
 
     //Get all titles
@@ -32,7 +34,7 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
     docs.forEach((doc: any) => titles.push(doc.data()));
 
     return titles;
-  }
+  };
 
   return (
     <div>
@@ -65,19 +67,22 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
                   <tbody>
                     <tr>
                       <td>
-                      <div className="select">
+                        <div className="select">
                           <select
                             onChange={(e) =>
                               setRtn((rtn: any) => {
                                 return { ...rtn, salutation: e.target.value! };
                               })
                             }
-                            value={rtn?.salutation ? rtn?.salutation : "N/A"}
+                            value={
+                              rtn?.salutation ? rtn?.salutation.value : "N/A"
+                            }
                           >
                             <option>{"N/A"}</option>
-                            { salutations.length > 0 && salutations.map(salutation => {
-                              return (<option>{salutation.value}</option>)
-                            })}
+                            {salutations.length > 0 &&
+                              salutations.map((salutation) => {
+                                return <option>{salutation.value}</option>;
+                              })}
                           </select>
                         </div>
                       </td>
@@ -92,9 +97,10 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
                             value={rtn?.title ? rtn?.title : "N/A"}
                           >
                             <option>{"N/A"}</option>
-                            { titles.length > 0 && titles.map(title => {
-                              return (<option>{title.value}</option>)
-                            })}
+                            {titles.length > 0 &&
+                              titles.map((title) => {
+                                return <option>{title.value}</option>;
+                              })}
                           </select>
                         </div>
                       </td>
@@ -173,9 +179,12 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
               className="button is-success"
               onClick={() => {
                 //save data to firebase
-
-                //cleanup
-                setRtn(undefined);
+                db.collection("contacts")
+                  .add(rtn)
+                  .then(() => {
+                    //cleanup
+                    setRtn(undefined);
+                  });
               }}
             >
               Save changes

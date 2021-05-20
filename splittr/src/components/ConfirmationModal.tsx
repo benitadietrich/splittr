@@ -8,6 +8,7 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
   const [titles, setTitles] = useState<Title[]>([]);
   const [salutations, setSalutations] = useState<Salutation[]>([]);
 
+  // method that gets executed when component mounts
   useEffect(() => {
     getTitles().then((titles) => {
       console.log(titles);
@@ -16,6 +17,7 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
     getSalutation().then((salutations) => setSalutations(salutations));
   }, []);
 
+  // fetch salutations from api
   const getSalutation = async (): Promise<Salutation[]> => {
     let salutations: Salutation[] = [];
 
@@ -26,6 +28,7 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
     return salutations;
   };
 
+  // fetch titles from api
   const getTitles = async (): Promise<Title[]> => {
     let titles: Title[] = [];
 

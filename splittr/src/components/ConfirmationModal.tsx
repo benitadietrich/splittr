@@ -71,7 +71,7 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
                           <select
                             onChange={(e) =>
                               setRtn((rtn: any) => {
-                                return { ...rtn, salutation: e.target.value! };
+                                return { ...rtn, salutation: {...rtn.salutation, value: e.target.value!} };
                               })
                             }
                             value={
@@ -81,7 +81,7 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
                             <option>{"N/A"}</option>
                             {salutations.length > 0 &&
                               salutations.map((salutation) => {
-                                return <option>{salutation.value}</option>;
+                                return <option value={salutation.value}>{salutation.value}</option>;
                               })}
                           </select>
                         </div>

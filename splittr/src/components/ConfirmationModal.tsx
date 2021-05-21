@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../backend/firebase";
 import { Gender } from "../model/Gender";
+import { Language } from "../model/Language";
 import { Salutation } from "../model/Salutation";
 import { Title } from "../model/Title";
 
@@ -150,7 +151,23 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
                         />
                       </td>
                       <td>
-                        <input
+                      <div className="select">
+                          <select
+                            onChange={(e) =>
+                              setRtn((rtn: any) => {
+                                return { ...rtn, language: e.target.value! };
+                              })
+                            }
+                            value={rtn?.language}
+                          >
+                            <option value={Language.DE}>{Language.DE}</option>
+                            <option value={Language.EN}>{Language.EN}</option>
+                            <option value={Language.ES}>{Language.ES}</option>
+                            <option value={Language.FR}>{Language.FR}</option>
+                            <option value={Language.IT}>{Language.IT}</option>
+                          </select>
+                        </div>
+                        {/* <input
                           className="input"
                           onChange={(e) =>
                             setRtn((rtn: any) => {
@@ -160,7 +177,7 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
                           value={rtn?.language}
                           type="text"
                           placeholder="N/A"
-                        />
+                        /> */}
                       </td>
                       <td>
                         <input

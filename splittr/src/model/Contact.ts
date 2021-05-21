@@ -14,10 +14,3 @@ export interface Contact{
     language?: string;
 }
 
-// <th>Salutation</th>
-// <th>Title</th>
-// <th>Gender</th>
-// <th>Firstname</th>
-// <th>Lastname</th>
-// <th>Language</th>
-// <th>Unformatted</th>

@@ -1,5 +1,5 @@
 export interface Title{
-    id: string;
+    id?: string;
     value: string;
-    lang: string;
+    lang?: string;
 }

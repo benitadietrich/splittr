@@ -97,7 +97,7 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
                                 return { ...rtn, title: e.target.value! };
                               })
                             }
-                            value={rtn?.title ? rtn?.title : "N/A"}
+                            value={rtn?.title ? rtn?.title : "N/A" && console.log(rtn)}
                           >
                             <option>{"N/A"}</option>
                             {titles.length > 0 &&

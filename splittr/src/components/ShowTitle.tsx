@@ -64,10 +64,10 @@ const ShowTitle = () => {
                     return (
 
                       <tr key={r.id}>
-                        <td>{`${r.id.slice(0, 6)}...`}</td>
+                        <td>{`${r.id?.slice(0, 6)}...`}</td>
                         <td>{r.lang}</td>
                         <td>{r.value}</td>
-                        <td onClick={() => removeTitle(r.id)}><button className="button">Remove</button></td>
+                        <td onClick={() => r.id ? removeTitle(r.id) : ""}><button className="button">Remove</button></td>
                       </tr>
 
                     )

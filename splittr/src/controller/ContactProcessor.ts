@@ -79,7 +79,7 @@ class ContactProcessor implements DataProcessor {
     //Extract the first and lastname
     let rest: string = stringElements.join(" ");
     let match: RegExpMatchArray | null = rest.match(namePattern);
-    console.log("match", match);
+    console.log("match", match)
 
     //if match length for look if its a simple name or last name
     if (stringElements.length === 1 || match?.length === 1) {
@@ -94,12 +94,8 @@ class ContactProcessor implements DataProcessor {
         .join("");
 
       //validate everything because of problems when lastnames have several whitespaces
-      if (
-        contact.firstname.concat(" ").concat(contact.lastname) !== match.input
-      ) {
-        contact.lastname = stringElements
-          .slice(1, stringElements.length)
-          .join(" ");
+      if(contact.firstname.concat(" ").concat(contact.lastname) !== match.input){
+        contact.lastname = stringElements.slice(1,stringElements.length).join(" ")
       }
     } else {
       //Look if last name after first name
@@ -114,41 +110,6 @@ class ContactProcessor implements DataProcessor {
       } else {
         contact.firstname = stringElements[0];
         contact.lastname = rest;
-      }
-
-      //set formatted string
-      if (contact.salutation?.gender === Gender.Female && contact.language === Language.DE) {
-        contact.formatted = "Sehr geehrte Frau ".concat(
-          contact.salutation?.value +
-            " " +
-            contact.title +
-            " " +
-            contact.lastname
-        );
-      } else if(contact.salutation?.gender === Gender.Male && contact.language === Language.DE) {
-        contact.formatted = "Sehr geehrter Herr".concat(
-          contact.salutation?.value +
-            " " +
-            contact.title +
-            " " +
-            contact.lastname
-        );
-      } else if( contact.salutation?.gender === Gender.Other && contact.language === Language.DE) {
-        contact.formatted = "Sehr geehrt* ".concat(
-          contact.salutation?.value +
-            " " +
-            contact.title +
-            " " +
-            contact.lastname
-        );
-      } else if(contact.language === Language.EN){
-        contact.formatted = "Dear ".concat(
-          contact.salutation?.value +
-            " " +
-            contact.title +
-            " " +
-            contact.lastname
-        );
       }
 
       //Replace commas

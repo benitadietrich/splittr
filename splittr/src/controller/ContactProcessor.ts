@@ -9,7 +9,7 @@ class ContactProcessor implements DataProcessor {
   async convert(str: string): Promise<Contact | undefined> {
     let salutations: Salutation[] = await this.getSalutations();
     let titles: Title[] = await this.getTitles();
-    let contact: Contact = { id: "aha" };
+    let contact: Contact = {};
     let stringElements: string[] = str.split(" ");
 
     //Set default gender

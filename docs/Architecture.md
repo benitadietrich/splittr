@@ -2,7 +2,7 @@
 ## Überblick
 Die erste Grafik soll einen Überblick über den gesamten Aufbau der Architektur der 
 Softwarequalitätsprojekte geben.
-<img src="../../docs/assets/architecture_2.png"
+<img src="../docs/assets/architecture_2.png"
      alt="Architecture"/>
 Anfragen aus dem Internet die auf eine der folgenden Domains treffen:
 * swq.paul-finkbeiner.de

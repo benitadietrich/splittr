@@ -1,7 +1,6 @@
 # User Stories
 
 ## User Story 1
-**Story Punkte:** 3,5
 
 **Priorität:** 1
 
@@ -19,7 +18,6 @@ Ich weiß, dass ich fertig bin, wenn:
 * Für jede Eingabe zumindest ein Vorschlag erbracht wird, auch wenn dieser nicht immer korrekt ist
 
 ## User Story 2
-**Story Punkte:** 1,5
 
 **Priorität:** 2 
 
@@ -30,7 +28,6 @@ Ich weiß, dass ich fertig bin, wenn:
 * Die Änderungen des Benutzers übernommen und abgespeichert werden.
 
 ## User Story 3 
-**Story Punkte:** 1,5
 
 **Priorität:** 4
 
@@ -41,7 +38,6 @@ Ich weiß, dass ich fertig bin, wenn:
 * Diese Titel dann für weitere Eingaben automatisch erkannt werden und keine manuelle Änderung mehr notwendig ist.
 
 ## User Story 4 (Begeisterungsanforderung)
-**Story Punkte:** 1,5
 
 **Priorität:** 5
 
@@ -51,7 +47,6 @@ Ich weiß, dass ich fertig bin, wenn:
 * Mir eine Konfigurationsmöglichkeit geboten wurde, um Muster ins System einzupflegen.
 
 ## User Story 5 
-**Story Punkte:** 0,5
 
 **Priorität:** 3
 
@@ -61,8 +56,6 @@ Ich weiß, dass ich fertig bin, wenn:
 * Eine Schnittstelle des CRM zur Überprüfung der Kontakte durch die Anwendung bedient, bzw. ich über die fehlende Erreichbarkeit des CRM informiert werde.
 
 ## User Story 6 (Begeisterungsanforderung)
-
-**Story Punkte:** 1
 
 **Priorität:** 6
 

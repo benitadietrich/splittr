@@ -13,8 +13,9 @@ class ContactProcessor implements DataProcessor {
     let contact: Contact = {};
     let stringElements: string[] = str.split(" ");
     let titlePattern: RegExp = /(([\w]+[.]))/;
-    let namePattern: RegExp = /([a-zA-Z]{2,}\s?[a-zA-Z]{1,})(\s)([a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?[a-zA-Z]{1,})?/;
-    let simpleNamePattern: RegExp = /([A-Z][a-z]*[\s]?)/
+    let namePattern: RegExp =
+      /([a-zA-Z|ä|ö|ü]{2,})(\s)([a-zA-Z|ä|ö|ü]{1,}'?-?[a-zA-Z|ä|ö|ü]{2,})(\s)?([a-zA-Z|ä|ö|ü]{1,}'?-?[a-zA-Z|ä|ö|ü]{2,})?/;
+    let simpleNamePattern: RegExp = /([A-Z|Ä|Ö|Ü][a-z|ä|ö|ü]*[\s]?)/;
 
     //Set default gender
     contact.gender = Gender.Other;
@@ -41,7 +42,10 @@ class ContactProcessor implements DataProcessor {
     //Extract titles
     let titleString: string[] = [];
     stringElements.forEach((element) => {
-      if (element.match(titlePattern)) {
+      if (
+        element.match(titlePattern) ||
+        titles.find((title) => title.value === element)
+      ) {
         titleString.push(element);
       }
     });
@@ -74,21 +78,25 @@ class ContactProcessor implements DataProcessor {
     }
 
     //Extract the first and lastname
-    let rest : string = stringElements.join(' ');
-    let match: RegExpMatchArray|null = rest.match(namePattern);
+    let rest: string = stringElements.join(" ");
+    let match: RegExpMatchArray | null = rest.match(namePattern);
+    console.log(match)
 
     //if match length for look if its a simple name or last name
-    if(match?.length===4 && rest.match(simpleNamePattern)){
+    if (match?.length === 4 && rest.match(simpleNamePattern)) {
       //first and last name
       contact.firstname = match[1];
       contact.lastname = match[3];
-    } else if(match?.length===4){
+    } else if (match?.length === 4) {
       //last name with prefix
       contact.lastname = match[1].concat(" ").concat(match[3]);
-    } else if(stringElements.length=1){
+    } else if ((stringElements.length = 1)) {
       //Only last name left
       contact.lastname = stringElements[0];
-    } 
+    } else if (match?.length === 5){
+      contact.firstname = match[1];
+      contact.lastname = match[3].concat(" ").concat(match[5])
+    }
 
     return contact;
   }

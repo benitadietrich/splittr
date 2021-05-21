@@ -167,17 +167,6 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
                             <option value={Language.IT}>{Language.IT}</option>
                           </select>
                         </div>
-                        {/* <input
-                          className="input"
-                          onChange={(e) =>
-                            setRtn((rtn: any) => {
-                              return { ...rtn, language: e.target.value! };
-                            })
-                          }
-                          value={rtn?.language}
-                          type="text"
-                          placeholder="N/A"
-                        /> */}
                       </td>
                       <td>
                         <input

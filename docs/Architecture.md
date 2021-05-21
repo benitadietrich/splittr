@@ -5,9 +5,9 @@ Softwarequalitätsprojekte geben.
 <img src="../docs/assets/architecture_2.png"
      alt="Architecture"/>
 Anfragen aus dem Internet die auf eine der folgenden Domains treffen:
-* swq.paul-finkbeiner.de
-* splittr.paul-finkbeiner.de
-* tnp.paul-finkbeiner.de
+* https://swq.paul-finkbeiner.de
+* https://splittr.paul-finkbeiner.de
+* https://tnp.paul-finkbeiner.de
 
 werden über einen Nginx Reverse Proxy Server auf eine IP-Adresse und einen Port umgeleitet.
 Je nach Domain erfolgt die Anfrage von einem dedizierten Webserver, der ebenfalls von der Firma Nginx stammt. 

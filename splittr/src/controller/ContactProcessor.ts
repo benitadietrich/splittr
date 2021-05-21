@@ -15,7 +15,6 @@ class ContactProcessor implements DataProcessor {
     let titlePattern: RegExp = /(([\w]+[.]))/;
     let namePattern: RegExp =
       /([a-zA-Z|ä|ö|ü]{2,})(\s)([a-zA-Z|ä|ö|ü]{1,}'?-?[a-zA-Z|ä|ö|ü]{2,})(\s)?([a-zA-Z|ä|ö|ü]{1,}'?-?[a-zA-Z|ä|ö|ü]{2,})?/;
-    let simpleNamePattern: RegExp = /([A-Z|Ä|Ö|Ü][a-z|ä|ö|ü]*[\s]?)/;
 
     //Set default gender
     contact.gender = Gender.Other;
@@ -80,26 +79,40 @@ class ContactProcessor implements DataProcessor {
     //Extract the first and lastname
     let rest: string = stringElements.join(" ");
     let match: RegExpMatchArray | null = rest.match(namePattern);
-    console.log(match)
+    console.log(stringElements);
 
     //if match length for look if its a simple name or last name
-    if (match?.length === 4 && rest.match(simpleNamePattern)) {
-      //first and last name
-      contact.firstname = match[1];
-      contact.lastname = match[3];
-      console.log("1")
-    } else if (match?.length === 4) {
-      //last name with prefix
-      contact.lastname = match[1].concat(" ").concat(match[3]);
-      console.log("2")
-    } else if ((stringElements.length === 1)) {
+    if (stringElements.length === 1) {
       //Only last name left
       contact.lastname = stringElements[0];
-      console.log("3")
-    } else if (match?.length === 6){
+    } else if (match?.length === 6) {
       contact.firstname = match[1];
-      contact.lastname = match[3].concat(" ").concat(match[5])
-      console.log("4")
+      contact.lastname = match[5]
+        ? match[3].concat(" ").concat(match[5])
+        : match[3];
+
+      if (match.slice(1, match.length).join("") !== match.input) {
+        let temp: string | undefined = match.input?.split(" ").reverse()[0];
+        contact.lastname = contact.lastname
+          ?.concat(" ")
+          .concat(temp ? temp : "");
+      }
+    } else {
+      //Look if last name after first name
+      if (stringElements[0].includes(",")) {
+        contact.lastname = stringElements[0];
+        contact.firstname = stringElements[1];
+      } else if (stringElements[1].includes(",")) {
+        contact.lastname = stringElements[0]
+          .concat(" ")
+          .concat(stringElements[1]);
+        contact.firstname = stringElements[1];
+      } else {
+        contact.lastname = rest;
+      }
+
+      //Replace commas
+      contact.lastname = contact.lastname.replace(",", "");
     }
 
     return contact;

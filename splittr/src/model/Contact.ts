@@ -3,7 +3,7 @@ import { Salutation } from "./Salutation";
 import { Title } from "./Title";
 
 export interface Contact{
-    id: string;
+    id?: string;
     salutation?: Salutation;
     title?: string;
     gender?: Gender;

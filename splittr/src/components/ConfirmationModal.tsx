@@ -188,6 +188,7 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
               className="button is-success"
               onClick={() => {
                 //save data to firebase
+                window.location.reload()
                 db.collection("contacts")
                   .add(rtn)
                   .then(() => {

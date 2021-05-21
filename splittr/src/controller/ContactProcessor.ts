@@ -14,7 +14,7 @@ class ContactProcessor implements DataProcessor {
     let stringElements: string[] = str.split(" ");
     let titlePattern: RegExp = /(([\w]+[.]))/;
     let namePattern: RegExp =
-      /([a-zA-Z|ä|ö|ü]{2,})(\s)([a-zA-Z|ä|ö|ü]{1,}'?-?[a-zA-Z|ä|ö|ü]{2,})(\s)?([a-zA-Z|ä|ö|ü]{1,}'?-?[a-zA-Z|ä|ö|ü]{2,})?/;
+      /([a-zA-Z|ä|ö|ü]{2,})(\s) 	([a-zA-Z|ä|ö|ü]{1,}'?-?[a-zA-Z|ä|ö|ü]{2,})(\s)?([a-zA-Z|ä|ö|ü]{1,}'?-?[a-zA-Z|ä|ö|ü]{2,})?/;
 
     //Set default gender
     contact.gender = Gender.Other;

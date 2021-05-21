@@ -8,6 +8,7 @@ Anfragen aus dem Internet die auf eine der folgenden Domains treffen:
 * swq.paul-finkbeiner.de
 * splittr.paul-finkbeiner.de
 * tnp.paul-finkbeiner.de
+
 werden über einen Nginx Reverse Proxy Server auf eine IP-Adresse und einen Port umgeleitet.
 Je nach Domain erfolgt die Anfrage von einem dedizierten Webserver, der ebenfalls von der Firma Nginx stammt. 
 Für das aktuelle Projekt ist besonders der mittlere Kommunikationspfad relevant.

@@ -16,7 +16,7 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
       setTitles(titles);
     });
     getSalutation().then((salutations) => setSalutations(salutations));
-  }, []);
+  }, [rtn]);
 
   // fetch salutations from api
   const getSalutation = async (): Promise<Salutation[]> => {
@@ -50,7 +50,7 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
             <button
               className="delete"
               aria-label="close"
-              onClick={() => setRtn(undefined)}
+              onClick={() => {setRtn(undefined);}}
             ></button>
           </header>
           <section className="modal-card-body">
@@ -98,7 +98,7 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
                                 return { ...rtn, title: e.target.value! };
                               })
                             }
-                            value={rtn?.title ? rtn?.title : "N/A" && console.log(rtn)}
+                            value={rtn?.title ? rtn?.title : "N/A"}
                           >
                             <option>{"N/A"}</option>
                             {titles.length > 0 &&
@@ -188,7 +188,6 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
               className="button is-success"
               onClick={() => {
                 //save data to firebase
-                window.location.reload()
                 db.collection("contacts")
                   .add(rtn)
                   .then(() => {

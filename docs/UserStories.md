@@ -4,7 +4,8 @@
 
 **Priorität:** 1
 
-Ich als Sachbearbeiter möchte, dass eingegebene Briefanreden automatisch in ihre Bestandteile aufgeteilt werden, um automatisiert Informationen zu erhalten. Die Bestandteile sind:
+Ich als Sachbearbeiter möchte, dass eingegebene Anreden automatisch in ihre Bestandteile aufgeteilt werden.
+Die Bestandteile sind:
 
 * Anrede
 * Standardisierte Briefanrede
@@ -14,7 +15,7 @@ Ich als Sachbearbeiter möchte, dass eingegebene Briefanreden automatisch in ihr
 * Nachname
 
 Ich weiß, dass ich fertig bin, wenn:
-* Die Informationenen möglichst korrekt aus der Briefrede extrahiert werden
+* Die Informationen möglichst korrekt aus der Briefrede extrahiert werden
 * Für jede Eingabe zumindest ein Vorschlag erbracht wird, auch wenn dieser nicht immer korrekt ist
 
 ## User Story 2
@@ -41,10 +42,10 @@ Ich weiß, dass ich fertig bin, wenn:
 
 **Priorität:** 5
 
-Ich als Sachbearbeiter möchte die Möglichkeit haben, Muster einer Briefanrede zu konfigurieren, um eine automatische Zuordnung von nicht bisher bekannten Mustern dieser zu unterstützen. 
+Ich als Sachbearbeiter möchte die möglichkeit haben angelegte Titel direkt über die Oberfläche löschen zu können. 
 
 Ich weiß, dass ich fertig bin, wenn:
-* Mir eine Konfigurationsmöglichkeit geboten wurde, um Muster ins System einzupflegen.
+* Ich bspw. fehlerhaft eingegebene Titel direkt über die Oberfläche aus der Datebank entfernen kann.
 
 ## User Story 5 
 

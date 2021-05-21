@@ -14,7 +14,7 @@ class ContactProcessor implements DataProcessor {
     let stringElements: string[] = str.split(" ");
     let titlePattern: RegExp = /(([\w]+[.]))/;
     let namePattern: RegExp =
-      /([a-zA-Z|ä|ö|ü]{2,})(\s) 	([a-zA-Z|ä|ö|ü]{1,}'?-?[a-zA-Z|ä|ö|ü]{2,})(\s)?([a-zA-Z|ä|ö|ü]{1,}'?-?[a-zA-Z|ä|ö|ü]{2,})?/;
+      /([a-zA-Z|ä|ö|ü]{2,})*([a-zA-Z|ä|ö|ü]{1,3}'?-?[a-zA-Z|ä|ö|ü]{2,})?(\s?[a-zA-Z|ä|ö|ü]{1,}'?-?[a-zA-Z|ä|ö|ü]{2,})?/;
 
     //Set default gender
     contact.gender = Gender.Other;
@@ -79,23 +79,23 @@ class ContactProcessor implements DataProcessor {
     //Extract the first and lastname
     let rest: string = stringElements.join(" ");
     let match: RegExpMatchArray | null = rest.match(namePattern);
-    console.log(stringElements);
+    console.log("match", match)
 
     //if match length for look if its a simple name or last name
-    if (stringElements.length === 1) {
+    if (stringElements.length === 1 || match?.length === 1) {
       //Only last name left
-      contact.lastname = stringElements[0];
-    } else if (match?.length === 6) {
+      contact.lastname = stringElements.join("");
+    } else if (match && !match.input?.includes(",")) {
+      //Object with index 1 is always first name
       contact.firstname = match[1];
-      contact.lastname = match[5]
-        ? match[3].concat(" ").concat(match[5])
-        : match[3];
+      contact.lastname = match
+        .splice(2, match.length - 1)
+        .filter((element) => element !== undefined)
+        .join("");
 
-      if (match.slice(1, match.length).join("") !== match.input) {
-        let temp: string | undefined = match.input?.split(" ").reverse()[0];
-        contact.lastname = contact.lastname
-          ?.concat(" ")
-          .concat(temp ? temp : "");
+      //validate everything because of problems when lastnames have several whitespaces
+      if(contact.firstname.concat(" ").concat(contact.lastname) !== match.input){
+        contact.lastname = stringElements.slice(1,stringElements.length).join(" ")
       }
     } else {
       //Look if last name after first name
@@ -108,6 +108,7 @@ class ContactProcessor implements DataProcessor {
           .concat(stringElements[1]);
         contact.firstname = stringElements[1];
       } else {
+        contact.firstname = stringElements[0];
         contact.lastname = rest;
       }
 

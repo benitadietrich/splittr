@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../backend/firebase";
 import { Gender } from "../model/Gender";
+import { Language } from "../model/Language";
 import { Salutation } from "../model/Salutation";
 import { Title } from "../model/Title";
 
@@ -102,7 +103,7 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
                             <option>{"N/A"}</option>
                             {titles.length > 0 &&
                               titles.map((title) => {
-                                return <option>{title.value}</option>;
+                                return <option value={title.value}>{title.value}</option>;
                               })}
                           </select>
                         </div>
@@ -150,17 +151,22 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
                         />
                       </td>
                       <td>
-                        <input
-                          className="input"
-                          onChange={(e) =>
-                            setRtn((rtn: any) => {
-                              return { ...rtn, language: e.target.value! };
-                            })
-                          }
-                          value={rtn?.language}
-                          type="text"
-                          placeholder="N/A"
-                        />
+                      <div className="select">
+                          <select
+                            onChange={(e) =>
+                              setRtn((rtn: any) => {
+                                return { ...rtn, language: e.target.value! };
+                              })
+                            }
+                            value={rtn?.language}
+                          >
+                            <option value={Language.DE}>{Language.DE}</option>
+                            <option value={Language.EN}>{Language.EN}</option>
+                            <option value={Language.ES}>{Language.ES}</option>
+                            <option value={Language.FR}>{Language.FR}</option>
+                            <option value={Language.IT}>{Language.IT}</option>
+                          </select>
+                        </div>
                       </td>
                       <td>
                         <input

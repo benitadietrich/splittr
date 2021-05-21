@@ -1,6 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { db } from "../backend/firebase";
+import { Gender } from "../model/Gender";
+import { Salutation } from "../model/Salutation";
+import { Title } from "../model/Title";
 
-const ConfirmationModal = ({rtn, setRtn}: {rtn: any, setRtn: any}) => {
+const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
+  const [titles, setTitles] = useState<Title[]>([]);
+  const [salutations, setSalutations] = useState<Salutation[]>([]);
+
+  // method that gets executed when component mounts
+  useEffect(() => {
+    getTitles().then((titles) => {
+      console.log(titles);
+      setTitles(titles);
+    });
+    getSalutation().then((salutations) => setSalutations(salutations));
+  }, []);
+
+  // fetch salutations from api
+  const getSalutation = async (): Promise<Salutation[]> => {
+    let salutations: Salutation[] = [];
+
+    //Get all salutation
+    let docs = await db.collection("salutation").get();
+    docs.forEach((doc: any) => salutations.push(doc.data()));
+
+    return salutations;
+  };
+
+  // fetch titles from api
+  const getTitles = async (): Promise<Title[]> => {
+    let titles: Title[] = [];
+
+    //Get all titles
+    let docs = await db.collection("title").get();
+    docs.forEach((doc: any) => titles.push(doc.data()));
+
+    return titles;
+  };
+
   return (
     <div>
       <div className={rtn ? "modal is-active" : "modal"}>
@@ -20,54 +58,70 @@ const ConfirmationModal = ({rtn, setRtn}: {rtn: any, setRtn: any}) => {
                 <table className="table">
                   <thead>
                     <tr>
-                      <th>Country Code</th>
-                      <th>Ortsvorwahl</th>
-                      <th>Number</th>
-                      <th>Durchwahl</th>
-                      <th>Region Code</th>
+                      <th>Salutation</th>
+                      <th>Title</th>
+                      <th>Gender</th>
+                      <th>Firstname</th>
+                      <th>Lastname</th>
+                      <th>Language</th>
                       <th>Unformatted</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td>
-                        <input
-                          className="input"
-                          onChange={(e) =>
-                            setRtn((rtn: any) => {
-                              return { ...rtn, salutation: e.target.value! };
-                            })
-                          }
-                          value={rtn?.salutation}
-                          type="text"
-                          placeholder="N/A"
-                        />
+                        <div className="select">
+                          <select
+                            onChange={(e) =>
+                              setRtn((rtn: any) => {
+                                return { ...rtn, salutation: {...rtn.salutation, value: e.target.value!} };
+                              })
+                            }
+                            value={
+                              rtn?.salutation ? rtn?.salutation.value : "N/A"
+                            }
+                          >
+                            <option>{"N/A"}</option>
+                            {salutations.length > 0 &&
+                              salutations.map((salutation) => {
+                                return <option value={salutation.value}>{salutation.value}</option>;
+                              })}
+                          </select>
+                        </div>
                       </td>
                       <td>
-                        <input
-                          className="input"
-                          onChange={(e) =>
-                            setRtn((rtn: any) => {
-                              return { ...rtn, title: e.target.value! };
-                            })
-                          }
-                          value={rtn?.title}
-                          type="text"
-                          placeholder="N/A"
-                        />
+                        <div className="select">
+                          <select
+                            onChange={(e) =>
+                              setRtn((rtn: any) => {
+                                return { ...rtn, title: e.target.value! };
+                              })
+                            }
+                            value={rtn?.title ? rtn?.title : "N/A"}
+                          >
+                            <option>{"N/A"}</option>
+                            {titles.length > 0 &&
+                              titles.map((title) => {
+                                return <option>{title.value}</option>;
+                              })}
+                          </select>
+                        </div>
                       </td>
                       <td>
-                        <input
-                          className="input"
-                          onChange={(e) =>
-                            setRtn((rtn: any) => {
-                              return { ...rtn, gender: e.target.value! };
-                            })
-                          }
-                          value={rtn?.gender}
-                          type="text"
-                          placeholder="N/A"
-                        />
+                        <div className="select">
+                          <select
+                            onChange={(e) =>
+                              setRtn((rtn: any) => {
+                                return { ...rtn, gender: e.target.value! };
+                              })
+                            }
+                            value={rtn?.gender}
+                          >
+                            <option>{Gender.Female}</option>
+                            <option>{Gender.Male}</option>
+                            <option>{Gender.Other}</option>
+                          </select>
+                        </div>
                       </td>
                       <td>
                         <input
@@ -98,6 +152,19 @@ const ConfirmationModal = ({rtn, setRtn}: {rtn: any, setRtn: any}) => {
                       <td>
                         <input
                           className="input"
+                          onChange={(e) =>
+                            setRtn((rtn: any) => {
+                              return { ...rtn, language: e.target.value! };
+                            })
+                          }
+                          value={rtn?.language}
+                          type="text"
+                          placeholder="N/A"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          className="input"
                           value={rtn?.unformatted}
                           disabled
                           type="text"
@@ -115,13 +182,12 @@ const ConfirmationModal = ({rtn, setRtn}: {rtn: any, setRtn: any}) => {
               className="button is-success"
               onClick={() => {
                 //save data to firebase
-                
-
-
-               
-
-                //cleanup
-                setRtn(undefined);
+                db.collection("contacts")
+                  .add(rtn)
+                  .then(() => {
+                    //cleanup
+                    setRtn(undefined);
+                  });
               }}
             >
               Save changes

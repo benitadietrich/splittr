@@ -102,7 +102,7 @@ const ConfirmationModal = ({ rtn, setRtn }: { rtn: any; setRtn: any }) => {
                             <option>{"N/A"}</option>
                             {titles.length > 0 &&
                               titles.map((title) => {
-                                return <option>{title.value}</option>;
+                                return <option value={title.value}>{title.value}</option>;
                               })}
                           </select>
                         </div>

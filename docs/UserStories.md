@@ -5,9 +5,8 @@
 
 **Priorität:** 1
 
-Ich als Sachbearbeiter möchte, dass eingegebene Briefanreden automatisch in ihre Bestandteile aufgeteilt werden, um automatisiert Informationen aus der Briefanrede extrahieren zu können. Die Bestandteile sind:
+Ich als Sachbearbeiter möchte, dass eingegebene Briefanreden automatisch in ihre Bestandteile aufgeteilt werden, um automatisiert Informationen zu erhalten. Die Bestandteile sind:
 
-* (Id)
 * Anrede
 * Standardisierte Briefanrede
 * Titel
@@ -16,29 +15,30 @@ Ich als Sachbearbeiter möchte, dass eingegebene Briefanreden automatisch in ihr
 * Nachname
 
 Ich weiß, dass ich fertig bin, wenn:
-* Die Informationenen korrekt aus der Briefrede extrahiert werden
-* 
+* Die Informationenen möglichst korrekt aus der Briefrede extrahiert werden
+* Für jede Eingabe zumindest ein Vorschlag erbracht wird, auch wenn dieser nicht immer korrekt ist
 
 ## User Story 2
 **Story Punkte:** 1,5
 
 **Priorität:** 2 
 
-Ich als Sachbearbeiter möchte eine Möglichkeit zur manuellen Eingabe von Daten, welche nicht automatisch zuordenbar sind, um unvollständige Informationen in der Datenbank zu vermeiden. 
+Ich als Sachbearbeiter möchte eine Möglichkeit zur manuellen Eingabe von Daten, welche nicht automatisch zugeordnet werden können, um unvollständige Informationen in der Datenbank zu vermeiden. 
 
 Ich weiß, dass ich fertig bin, wenn:
-* Für die nicht automatisch erkannten Daten eine manuelle Eingabe möglich ist.
+* Nach jeder Validierung ein Bearbeitungsfenster geöffnet wird
+* Die Änderungen des Benutzers übernommen und abgespeichert werden.
 
 ## User Story 3 
 **Story Punkte:** 1,5
 
 **Priorität:** 4
 
-Ich als Sachbearbeiter möchte eine Möglichkeit zur Eingabe von neuen Titeln. Diese Titel werden dann für weitere Eingaben automatisch erkannt. 
+Ich als Sachbearbeiter möchte eine Möglichkeit zur Eingabe von neuen Titeln. Diese Titel werden dann für weitere Eingaben automatisch erkannt.
 
 Ich weiß, dass ich fertig bin, wenn:
 * Ich über eine Eingabemaske neue Titel hinzufügen kann
-* Diese Titel dann für weitere Eingaben automatisch erkannt werden und keine manuelle Eingabe notwendig ist
+* Diese Titel dann für weitere Eingaben automatisch erkannt werden und keine manuelle Änderung mehr notwendig ist.
 
 ## User Story 4 (Begeisterungsanforderung)
 **Story Punkte:** 1,5

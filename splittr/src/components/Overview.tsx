@@ -47,8 +47,6 @@ const onCollectionUpdate = (querySnapshot: any) => {
                 <th>gender</th>
                 <th>firstname</th>
                 <th>lastname</th>
-                <th>unformatted</th>
-                <th>formatted</th>
               </tr>
             </thead>
 
@@ -67,8 +65,6 @@ const onCollectionUpdate = (querySnapshot: any) => {
                         <td>{r.gender}</td>
                         <td>{r.firstname}</td>
                         <td>{r.lastname}</td>
-                        <td>{r.unformatted}</td>
-                        <td>{r.formatted}</td>
                       </tr>
 
                     )

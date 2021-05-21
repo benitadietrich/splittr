@@ -87,15 +87,19 @@ class ContactProcessor implements DataProcessor {
       //first and last name
       contact.firstname = match[1];
       contact.lastname = match[3];
+      console.log("1")
     } else if (match?.length === 4) {
       //last name with prefix
       contact.lastname = match[1].concat(" ").concat(match[3]);
-    } else if ((stringElements.length = 1)) {
+      console.log("2")
+    } else if ((stringElements.length === 1)) {
       //Only last name left
       contact.lastname = stringElements[0];
-    } else if (match?.length === 5){
+      console.log("3")
+    } else if (match?.length === 6){
       contact.firstname = match[1];
       contact.lastname = match[3].concat(" ").concat(match[5])
+      console.log("4")
     }
 
     return contact;
